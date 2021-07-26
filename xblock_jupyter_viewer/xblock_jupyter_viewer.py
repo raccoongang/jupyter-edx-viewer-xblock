@@ -2,9 +2,9 @@
 
 import logging
 import pkg_resources
-from urllib import urlencode
+from urllib.parse import urlencode
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from xblock.core import XBlock
 from xblock.fields import Scope, String, Integer
@@ -20,7 +20,7 @@ class JupyterViewerXBlock(XBlock, StudioEditableXBlockMixin):
     display_name = String(
         display_name="Display Name", default="Jupyter Notebook Viewer",
         scope=Scope.settings,
-        help="Name of this XBlock" 
+        help="Name of this XBlock"
     )
 
     jupyter_url = String(
@@ -81,7 +81,7 @@ class JupyterViewerXBlock(XBlock, StudioEditableXBlockMixin):
         log.debug("Full URL: {}".format(full_url))
         base_html = self.resource_string('static/html/student_view.html')\
             .format(self.xblock_height, full_url)
-        
+
         # add html and css
         frag = Fragment(base_html)
         # frag.add_css(self.resource_string('static/css/style.css'))

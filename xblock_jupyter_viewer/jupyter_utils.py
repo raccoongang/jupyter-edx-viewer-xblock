@@ -1,13 +1,13 @@
 import json
-import logging 
+import logging
 
 import requests
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor, CellExecutionError
 from nbconvert import HTMLExporter
 
-from preprocessors import ImageReplacement, RemoveCustomCSS
-from post_processors import remove_box_shadow, insert_target_blank
+from .preprocessors import ImageReplacement, RemoveCustomCSS
+from .post_processors import remove_box_shadow, insert_target_blank
 
 
 log = logging.getLogger(__name__)
@@ -58,7 +58,7 @@ def filter_start_end(nb, start_tag=None, end_tag=None):
         log.warning("No cell with start content: {} found".format(end_tag))
 
     nb['cells'] = nb['cells'][start_cell_num:end_cell_num]
-    
+
     return nb
 
 
@@ -70,7 +70,7 @@ def preprocess(nb, processors):
     for cell in gen:
         for t in processors:
             t.process_cell(cell)
-    
+
     # Run finish on each processor
     for t in processors:
         t.finish()
