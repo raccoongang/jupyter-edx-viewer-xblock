@@ -30,7 +30,7 @@ setup(
     ],
     install_requires=[
         'XBlock',
-        'nbconvert',
+        'nbconvert==5.6.1',
         'nbformat',
         'requests'
     ],
